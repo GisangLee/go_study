@@ -1,4 +1,6 @@
-package chapter5
+// You can edit this code!
+// Click here and start typing.
+package main
 
 import (
 	"encoding/json"
@@ -30,14 +32,11 @@ func (id *ID) UnmarshalJSON(data []byte) error {
 	var str string
 
 	if err := json.Unmarshal(data, &str); err == nil {
-		return err
+		*id = ID(len(str))
+		return nil
 	}
 
-	fmt.Println(str)
-	fmt.Println(len(str))
-
-	*id = ID(len(str))
-	return nil
+	return fmt.Errorf("invalid ID value")
 }
 
 /*
@@ -53,7 +52,7 @@ func (id ID) MarshalJSON() ([]byte, error) {
 func number_3() {
 	// Serialize
 	data := Data{
-		ID:   1234567890123456789,
+		ID:   ID(1234567890123456789),
 		Name: "장고",
 	}
 
@@ -72,4 +71,9 @@ func number_3() {
 
 	// %#v -> 해당 값을 생성하는 소스코드 스니펫 출력.
 	fmt.Printf("%#v\n", data)
+}
+
+func main() {
+	fmt.Println("Hello, 世界")
+	number_3()
 }
