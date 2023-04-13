@@ -21,6 +21,7 @@ func (m *MyStruct) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
+	
 	if num, err := strconv.ParseInt(string(aux.ID), 10, 64); err == nil {
 		m.ID = strconv.FormatInt(num, 10)
 	} else {
